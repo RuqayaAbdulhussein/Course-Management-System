@@ -1,0 +1,47 @@
+<link href="css/style.css" rel="stylesheet">
+<div class="container mt-4 d-flex justify-content-end">
+    
+  <a href="/logout" class="btn btn-danger mb-3">
+    Logout
+  </a>
+</div>
+
+<h2 class="head">Instructor Dashboard</h2>
+<div class="queue-container">
+
+  <div class="queue-box">
+    <h3>Course Registration</h3>
+    <p>Pending Requests: {{courseRegQueue}}</p>
+    <form action="/queue/CourseRegistration" method="get">
+      <button class="btn btn-primary">View Queue</button>
+    </form>
+  </div>
+
+  <div class="queue-box">
+    <h3>Capstone</h3>
+    <p>Pending Requests: {{capstoneQueue}}</p>
+    <form action="/queue/Capstone" method="get">
+      <button class="btn btn-primary">View Queue</button>
+    </form>
+  </div>
+
+  <div class="queue-box">
+    <h3>Complaint</h3>
+    <p>Pending Requests: {{complaintQueue}}</p>
+    <form action="/queue/Complaint" method="get">
+      <button class="btn btn-primary">View Queue</button>
+    </form>
+  </div>
+
+  <div class="queue-box">
+    <h3>Other</h3>
+    <p>Pending Requests: {{otherQueue}}</p>
+    <form action="/queue/Other" method="get">
+      <button class="btn btn-primary">View Queue</button>
+    </form>
+  </div>
+</div>
+
+<form action="/randomRequest" method="post" style="margin-top: 30px;">
+  <button type="submit" class="btn btn-primary">I don’t know where to begin!</button>
+</form>

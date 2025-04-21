@@ -1,0 +1,82 @@
+<link href="css/style.css" rel="stylesheet">
+
+<div class="container mt-4">
+  <a href="/instructorDashboard" class="btn btn-outline-secondary mb-3">
+    ← Back to Dashboard
+  </a>
+</div>
+
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4>{{category}} Requests</h4>
+    <div class="message-notError">
+      <p>{{ message }}</p>
+    </div>
+  </div>
+
+  <div class="card mb-5 shadow-sm">
+    <div class="card-header bg-secondary text-white">
+      All Requests
+    </div>
+    <div class="card-body">
+      {{#if requests.length}}
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover align-middle">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Request Type</th>
+                <th>Semester</th>
+                <th>Submission Time</th>
+                <th>Status</th>
+                <th>Request</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each requests}}
+                <tr>
+                  <td>{{@index}}</td>
+                  <td>{{this.username}}</td>
+                  <td>{{this.category}}</td>
+                  <td>{{this.semester}}</td>
+                  <td>{{this.date}}</td>
+                  <td>{{this.status}}</td>
+                  <td>{{this.request}}</td>
+                  <td>
+                    <form action="/handleRequest" method="post">
+                      <div class="mb-2">
+                        <textarea 
+                          class="form-control" 
+                          name="note" 
+                          placeholder="Enter your note..." 
+                          rows="6" 
+                          style="width: 100%; resize: vertical;"></textarea>
+                      </div>
+                      <input type="hidden" name="csrfToken" value="{{../token}}">
+                      <input type="hidden" name="id" value="{{this._id}}">
+                      <input type="hidden" name="userid" value="{{this.userid}}">
+                      <input type="hidden" name="category" value="{{this.category}}">
+
+                      <div class="d-grid gap-2">
+                        <button class="btn btn-success btn-sm" name="action" value="Resolved" type="submit">Resolve</button>
+                        <button class="btn btn-danger btn-sm" name="action" value="Rejected" type="submit">Reject</button>
+                      </div>
+                    </form>
+                  </td>
+                </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      {{else}}
+        <div class="table-wrapper">
+          <div class="table-responsive text-center text-muted p-4">
+            <p>No requests found.</p>
+          </div>
+        </div>
+      {{/if}}
+    </div>
+  </div>
+</div>

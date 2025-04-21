@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Dashboard</title>
+</head>
+<body>
+  <div class="container mt-4 d-flex justify-content-end">
+  <a href="/logout" class="btn btn-danger">
+    Logout
+  </a>
+</div>
+
+  <header>
+    <h1>Student Request Page</h1>
+  </header>
+  <div class="message-notError">
+     <p>{{ message }}</p>
+  </div>
+  <div class="dashboard">
+    <div class="left-column card">
+      <h2>User Profile</h2>
+      <p><strong>ID:</strong> {{userinfo.userid}}</p>
+      <p><strong>Name:</strong> {{userinfo.name}}</p>
+      <p><strong>Email:</strong> {{userinfo.email}}</p>
+      <p><strong>Phone:</strong> {{userinfo.phone}}</p>
+
+      <form action="/allRequests" method="post">
+      <input type="hidden" name = "userid" value={{userinfo.userid}} required />
+      <button type="submit">View All Requests</button>
+      </form>
+    </div>
+
+    <div class="right-column card">
+      <h2>Submit New Request</h2>
+      <form action="/newRequest" method="post">
+        <input type="hidden" name = "userid" value={{userinfo.userid}} required />
+        <input type="hidden" name = "username" value={{userinfo.name}}  required />
+        <input type="hidden" name = "email" value={{userinfo.email}}  required />
+        <input type="hidden" name = "phone" value={{userinfo.phone}}  required />
+
+        <select name="semester" required>
+          <option value="">Select Semester</option>
+          <option value="fall2024">Fall 2024</option>
+          <option value="winter2025">Winter 2025</option>
+          <option value="spring2025">Spring 2025</option>
+        </select>
+
+        <select name="category" required>
+          <option value="">Request Category</option>
+          <option value="CourseRegistration">Course Registration</option>
+          <option value="Capstone">Capstone</option>
+          <option value="Complaint">Complaint</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <textarea name="request" placeholder="Describe your request..." rows="6"></textarea>
+
+        <button type="submit">Submit Request</button>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>
